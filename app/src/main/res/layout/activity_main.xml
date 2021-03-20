@@ -54,4 +54,14 @@
         android:layout_gravity="center"/>
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Log out"
+        android:textColor="#212F3D"
+        android:backgroundTint="#F2F3F4"
+        android:layout_marginTop="50dp"
+        />
 </LinearLayout>

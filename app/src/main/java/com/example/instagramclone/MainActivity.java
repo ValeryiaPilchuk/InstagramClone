@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView ivPostImage;
     private Button btnSubmit;
     private File photoFile;
+    private Button btnLogout;
     public String photoFileName = "photo.jpg";
 
     @Override
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         btnCaptureImage = findViewById(R.id.btnCaptureImage);
         ivPostImage = findViewById(R.id.ivPostImage);
         btnSubmit = findViewById(R.id.btnSubmit);
+        btnLogout = findViewById(R.id.btnLogout);
 
         btnCaptureImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,6 +57,16 @@ public class MainActivity extends AppCompatActivity {
                 launchCamera();
             }
         });
+
+       btnLogout.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               ParseUser.logOut();
+               ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+               Intent i = new Intent(MainActivity.this, LoginActivity.class);
+               startActivity(i);
+           }
+       });
 
      //   queryPosts();
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -138,11 +150,14 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"Error while saving",Toast.LENGTH_SHORT).show();
                 }
                 Log.i(TAG, "Post save was successful!!");
+                Toast.makeText(MainActivity.this,"Posted!!",Toast.LENGTH_SHORT).show();
                 etDescription.setText("");
                 ivPostImage.setImageResource(0);
             }
         });
     }
+
+
 
     private void queryPosts() {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
